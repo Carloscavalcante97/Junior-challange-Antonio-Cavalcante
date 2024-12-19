@@ -1,0 +1,189 @@
+﻿@page
+@model Junior_challange_.Pages.EditarAnelModel
+
+@{
+    ViewData["Title"] = "EditarAnel";
+}
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+</head>
+    <style>
+        body {
+            background-color: #3a4a48;
+            font-family: 'Garamond', serif;
+            color: #f1e1b3;
+            margin: 0;
+            padding: 0;
+        }
+
+    h1.forja {
+        font-family: 'Cinzel Decorative', serif;
+        font-size: 3rem;
+        color: #e9c46a;
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    }
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: #e9c46a;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: #e9c46a;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .col-md-4 {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #4e5d4e;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                font-size: 1.2rem;
+                color: #f1e1b3;
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #6c5b3f;
+            border-radius: 5px;
+            background-color: #3e5d4d;
+            color: #f1e1b3;
+            font-size: 1rem;
+        }
+
+            .form-control:focus {
+                border-color: #e9c46a;
+                box-shadow: 0 0 5px rgba(233, 196, 106, 0.7);
+            }
+
+        .btn-primary {
+            background-color: #4c7c4a;
+            color: #f1e1b3;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+            .btn-primary:hover {
+                background-color: #6f8c6b;
+            }
+
+        .text-danger {
+            color: #d9534f;
+            font-size: 0.9rem;
+        }
+
+        .form-group span.text-danger {
+            font-weight: bold;
+        }
+
+        .text-danger {
+            font-size: 1rem;
+            display: block;
+            margin-top: 5px;
+        }
+
+        a {
+            font-size: 1.2rem;
+            color: #e9c46a;
+            text-decoration: none;
+            margin-top: 30px;
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #4c7c4a;
+            border-radius: 5px;
+        }
+
+            a:hover {
+                background-color: #6f8c6b;
+                text-decoration: underline;
+            }
+    </style>
+
+<h1>Editar Anel</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Anel.Id" />
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Anel.Nome" class="control-label"></label>
+                <input asp-for="Anel.Nome" class="form-control" />
+                <span asp-validation-for="Anel.Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Anel.Poder" class="control-label"></label>
+                <input asp-for="Anel.Poder" class="form-control" />
+                <span asp-validation-for="Anel.Poder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Anel.Portador" class="control-label"></label>
+                <input asp-for="Anel.Portador" class="form-control" />
+                <span asp-validation-for="Anel.Portador" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Anel.Forjador" class="control-label"></label>
+                <input asp-for="Anel.Forjador" class="form-control" />
+                <span asp-validation-for="Anel.Forjador" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Anel.Imagem" class="control-label"></label>
+                <input asp-for="Anel.Imagem" class="form-control" />
+                <span asp-validation-for="Anel.Imagem" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Início</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

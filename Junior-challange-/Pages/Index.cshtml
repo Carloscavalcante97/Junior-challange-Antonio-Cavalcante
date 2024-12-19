@@ -1,0 +1,183 @@
+﻿@page
+@namespace Junior_Challenge.Pages
+@model Junior_Challenge.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<style>
+
+    body {
+        background-color: #2a3d35;
+        font-family: 'Garamond', serif;
+        color: #f1e1b3;
+        margin: 0;
+        padding: 0;
+    }
+     h1.forja {
+        font-family: 'Cinzel Decorative', serif; 
+        font-size: 3rem;
+        color: #e9c46a;
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 3rem;
+        color: #e9c46a;
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    p a {
+        font-size: 1.2rem;
+        color: #e9c46a;
+        text-decoration: none;
+        background-color: #4c7c4a;
+        padding: 10px 15px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        display: inline-block;
+        margin-bottom: 30px;
+    }
+
+        p a:hover {
+            background-color: #6f8c6b;
+            text-decoration: underline;
+        }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border: 2px solid #6c5b3f;
+        background-color: #3e5d4d;
+    }
+
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #6c5b3f;
+            font-size: 1rem;
+            color: #f1e1b3;
+        }
+
+        .table th {
+            background-color: #4c7c4a;
+            font-family: 'Cinzel', serif;
+        }
+
+        .table td {
+            background-color: #556b2f;
+            font-family: 'Garamond', serif;
+        }
+
+            .table td a {
+                font-size: 1rem;
+                color: #e9c46a;
+                text-decoration: none;
+                padding: 5px 10px;
+                border-radius: 5px;
+                background-color: #4c7c4a;
+            }
+
+                .table td a:hover {
+                    background-color: #6f8c6b;
+                    text-decoration: underline;
+                }
+
+        .table tr:nth-child(even) {
+            background-color: #475d44;
+        }
+
+        .table tr:hover {
+            background-color: #4f6d56;
+        }
+
+</style>
+
+<h1>A forja</h1>
+
+<p>
+    <a href="/CriarAnel">Forje seu anel</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Aneis[0].Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aneis[0].Poder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aneis[0].Portador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aneis[0].Forjador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aneis[0].Imagem)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Aneis)
+        {
+            <tr id="ring-@item.Id">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Poder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Portador)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Forjador)
+                </td>
+                <td>
+                    <img src="@item.Imagem" alt="Imagem do Anel" style="max-width: 100px; max-height: 100px;" />
+                </td>
+                <td>
+                    <a asp-page="/EditarAnel" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-page="/DetalharAnel" asp-route-id="@item.Id">Detalhar</a> |
+                    <a href="javascript:void(0);" onclick="deleteRing('@item.Id')">Deletar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+ function deleteRing(id) {
+    if (confirm("Tem certeza que deseja deletar este anel?")) {
+        fetch(`/api/Anel/${id}`, { method: 'DELETE' })
+            .then(response => {
+                if (response.ok) {
+                    $("#ring-" + id).remove();
+                    location.reload();
+                } else {
+                    throw new Error('Erro ao deletar o anel.');
+                }
+            })
+            .catch(error => {
+                alert(error.message);
+                console.error(error);
+            });
+    }
+}
+</script>
